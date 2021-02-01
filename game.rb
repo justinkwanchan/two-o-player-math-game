@@ -35,7 +35,7 @@ class Game
   end
   
   def play
-    while not self.player_scores.include? 0
+    until self.player_scores.include? 0
       self.initiate_turn
     end 
 
