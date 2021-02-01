@@ -9,20 +9,29 @@
 #   * end_game(score1, score2) which outputs a message detailing who won the game
 
 class Turn
-  attr_accessor :question
+  attr_reader :player, :addend1, :addend2
   def initialize(player_1_turn)
-    @player_1_turn = player_1_turn
-    @question = ""
+    @player = player_1_turn ? "Player 1" : "Player 2"
     @addend1 = rand(1...20)
     @addend2 = rand(1...20)
   end
 
   def generate_question
-    self.question = "#{@player_1_turn ? "Player 1" : "Player 2"}: What does #{@addend1} plus #{@addend2} equal?"
+    "#{self.player}: What does #{self.addend1} plus #{self.addend2} equal?"
   end
 
-  def answer(sum)
+  def answer()
+    puts generate_question
+    
+    answer = gets.chomp.to_i
 
+    if answer == (addend1 + addend2)
+      puts "#{self.player}: YES! You are correct"
+      true
+    else
+      puts "#{self.player}: Seriously? No!"
+      false
+    end
   end
 
   def score_output(score1, score2)
