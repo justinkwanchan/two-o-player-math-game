@@ -4,7 +4,4 @@ require "./turn.rb"
 
 game = Game.new
 
-game.initiate_turn
-game.initiate_turn
-puts game.turn_arr.inspect
-puts game.player_scores.inspect
+game.play
