@@ -1,5 +1,6 @@
 class Turn
   attr_reader :player, :addend1, :addend2
+  
   def initialize(player_1_turn)
     @player = player_1_turn ? "Player 1" : "Player 2"
     @addend1 = rand(1...20)
@@ -11,7 +12,7 @@ class Turn
     
     answer = gets.chomp.to_i
 
-    if answer == (addend1 + addend2)
+    if answer == addend1 + addend2
       puts "#{self.player}: YES! You are correct"
       true
     else

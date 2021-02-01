@@ -1,23 +1,22 @@
 class Game
-  attr_accessor :player_1_turn, :player_scores, :turn_arr, :end_game
+  attr_accessor :player_1_turn
+  attr_reader :player_scores
 
   def initialize
     @player_1_turn = true
     @player_scores = [3, 3]
-    @turn_arr = []
   end
 
   def initiate_turn
-    turn_arr << Turn.new(@player_1_turn)
-    turn = turn_arr[turn_arr.length() - 1]
+    turn = Turn.new(@player_1_turn)
     correct = turn.answer
 
-    if !correct
-      @player_scores[self.player_1_turn ? 0 : 1] -= 1
+    unless correct
+      self.player_scores[self.player_1_turn ? 0 : 1] -= 1
     end
     
-    if !@player_scores.include? 0
-      turn.score_output(*@player_scores)
+    unless self.player_scores.include? 0
+      turn.score_output(*self.player_scores)
       puts "----- NEW TURN -----"
     end
 
@@ -30,13 +29,16 @@ class Game
     else
       puts "Player 2 wins with a score of #{score2}/3"
     end
+
+    puts "----- GAME OVER -----"
+    puts "Good bye!"
   end
   
   def play
-    begin
+    while not self.player_scores.include? 0
       self.initiate_turn
-    end while !@player_scores.include? 0
+    end 
 
-    self.end_game(*@player_scores)
+    self.end_game(*self.player_scores)
   end
 end
